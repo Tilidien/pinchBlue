@@ -141,9 +141,12 @@ void* pinchBlue_plist_getLast(plist* l)
 
 void* pinchBlue_plist_getFirst(plist* l)
 {
-    
+    return (l->start) ? l->start->data : NULL;
 }
 
 void* pinchBlue_plist_pop(plist* l)
 {
+    void* out = pinchBlue_plist_getLast(l);
+    pinchBlue_plist_removeLastElem(l);
+    return out;
 }
