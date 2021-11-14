@@ -7,7 +7,7 @@ typedef struct{
 	int					socket;
 	int*				keepRunning;
 	pthread_mutex_t*	mutex;
-	plist				data[3];
+	plist**				data;
 } pinchBlue_adapter_args;
 
 void* pinchBlue_adapter_startThread(void* in)
@@ -17,7 +17,7 @@ void* pinchBlue_adapter_startThread(void* in)
 								args->socket,
 								args->keepRunning, 
 								args->mutex, 
-								args->data);
+								&args->data);
 }
 
 void pinchBlue_adapter_thread(	int 				dev_id, 
@@ -34,11 +34,11 @@ void pinchBlue_adapter_thread(	int 				dev_id,
 		pthread_mutex_unlock(data[0].mutex);
 		if (x)
 		{
-			pinchBlue_adapter_imitate(dev_id, socket, data);
+			pinchBlue_adapter_imitate(dev_id, data);
 		}
 		else 
 		{
-			pinchBlue_adapter_search(dev_id, socket, data);
+			pinchBlue_adapter_search(dev_id, data);
 		}
 	}
 }
@@ -51,15 +51,36 @@ int pinchBlue_adapter_checkTermination(int* keepRunning, pthread_mutex_t* mutex)
 	return out;
 }
 
-void pinchBlue_adapter_imitate(int dev_id, int socket, plist data[3])
+int pinchBlue_adapter_connect(int dev_id,xdevice* externalDevice)
 {
-	xdevice* externalDevice = pinchBlue_pList_pop(&data[0]);
-
-	pinchBlue_plist_addElem(externalDevice, &data[1]);
+	//DUMMYCLASS TODO
+	return 1;
 }
 
-void pinchBlue_adapter_search(int dev_id, int socket, plist data[3])
+pinchBlue_adapter_impersonate(int dev_id,xdevice* externalDevice)
 {
+	//DUMMYCLASS TODO
+}
+
+void pinchBlue_adapter_imitate(int dev_id, plist data[3])
+{
+	xdevice* externalDevice = pinchBlue_pList_pop(&data[0]);
+	
+	if (pinchBlue_adapter_connect(dev_id, externalDevice))
+	{
+		pinchBlue_adapter_impersonate(dev_id, externalDevice);
+		pthread_mutex_lock(data[1].mutex);
+		pinchBlue_plist_addElem(externalDevice, &data[1]);
+		pthread_mutex_unlock(data[1].mutex);
+	}
+	else free(externalDevice);
+
+}
+
+void pinchBlue_adapter_search(int dev_id, plist data[3])
+{
+	int socket = hci_open_dev(dev_id);
 	inquiry_info* ii = NULL;
-	hci_inquiry(dev_id, 1, 255, NULL, &ii, NULL);
+	hci_inquiry(dev_id, 8, 255, NULL, &ii, NULL);
+	close(socket);
 }
