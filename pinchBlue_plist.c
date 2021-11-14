@@ -1,5 +1,6 @@
+
+#define PINCHBLUE_PLIST_C
 #include "pinchBlue.h"
-#include <pthread.h>
 
 typedef struct s_elem
 {
@@ -9,8 +10,8 @@ typedef struct s_elem
 
 typedef struct s_protecter_list
 {
-    pthread_mutex_t* mutex;
-    elem* start;
+    pthread_mutex_t*    mutex;
+    elem*               start;
 } plist;
 
 plist* pinchBlue_plist_createPlist()
