@@ -13,6 +13,5 @@ int main()
 	{
 		currentDevice = hci_get_route( NULL );
 		currentSocket = hci_open_dev( currentDevice );
-
 	}
 }

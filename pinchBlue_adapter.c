@@ -3,8 +3,8 @@
 
 
 typedef struct{
-	int 				dev_id;
-	int 				socket;
+	int					dev_id;
+	int					socket;
 	int*				keepRunning;
 	pthread_mutex_t*	mutex;
 	plist				data[3];

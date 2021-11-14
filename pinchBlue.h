@@ -10,10 +10,24 @@
 #   include <bluetooth/hci_lib.h>
 #   include <pthread.h>
 
-    typedef struct {
-        char* addr;
-        char* name;
-    } xdevice;
+typedef struct	s_elem
+{
+	void*	data;
+	elem*	next;
+
+}				elem;
+
+typedef struct	s_protecter_list
+{
+	pthread_mutex_t*	mutex;
+	elem*				start;
+}				plist;
+
+typedef struct	bluetoothdevice
+{
+	char*	addr;
+	char*	name;
+}				xdevice;
 
 #   ifndef PINCHBLUE_SNIFFER_C
 #       include "pinchBlue_sniffer.c"

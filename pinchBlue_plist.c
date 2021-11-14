@@ -2,18 +2,6 @@
 #define PINCHBLUE_PLIST_C
 #include "pinchBlue.h"
 
-typedef struct s_elem
-{
-    void* data;
-    elem* next;
-} elem;
-
-typedef struct s_protecter_list
-{
-    pthread_mutex_t*    mutex;
-    elem*               start;
-} plist;
-
 plist* pinchBlue_plist_createPlist()
 {
     plist* out = (plist*)malloc(sizeof(plist));
