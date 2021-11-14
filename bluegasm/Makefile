@@ -1,5 +1,5 @@
 CC		= gcc
-#CFLAGS	= -Wall -Wextra
+CFLAGS	= -Wall -Wextra
 NAME	= simplescan
 FLAGS	= 
 INCLUDE	= -lbluetooth
