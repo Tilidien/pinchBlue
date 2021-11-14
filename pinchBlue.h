@@ -9,6 +9,7 @@
 #   include <bluetooth/hci.h>
 #   include <bluetooth/hci_lib.h>
 #   include <pthread.h>
+#	include <sys/ioctl.h>
 
 typedef struct	s_elem
 {
