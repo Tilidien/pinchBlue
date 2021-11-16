@@ -8,28 +8,29 @@
 #   include <bluetooth/bluetooth.h>
 #   include <bluetooth/hci.h>
 #   include <bluetooth/hci_lib.h>
+#	include <bluetooth/rfcomm.h>
 #   include <pthread.h>
 #	include <sys/ioctl.h>
 
-typedef struct	s_elem
+/*typedef struct	s_elem
 {
 	void*	data;
 	elem*	next;
 
 }				elem;
-
 typedef struct	s_protecter_list
 {
 	pthread_mutex_t*	mutex;
 	elem*				start;
 }				plist;
+*/
 
 typedef struct	bluetoothdevice
 {
 	char*	addr;
 	char*	name;
 }				xdevice;
-
+/*
 #   ifndef PINCHBLUE_SNIFFER_C
 #       include "pinchBlue_sniffer.c"
 #   endif
@@ -40,5 +41,7 @@ typedef struct	bluetoothdevice
 
 #   ifndef PINCHBLUE_ADAPTER_C
 #       include "pinchBlue_adapter.c"
-#   endif
+#   endif */
 #endif
+
+//hcivonfig hci0 class "classname" (audio headset = 1c0420)	
